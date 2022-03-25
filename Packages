@@ -1,0 +1,17 @@
+Package: slack-desktop
+Version: 4.24.0
+Architecture: amd64
+Maintainer: Slack Technologies <feedback@slack.com>
+Installed-Size: 144964
+Depends: libgtk-3-0, libappindicator3-1, libnotify4, libnss3, libxss1, libxtst6, xdg-utils, libatspi2.0-0, libuuid1, kde-cli-tools | kde-runtime | trash-cli | libglib2.0-bin | gvfs-bin, apt-transport-https
+Recommends: pulseaudio | libasound2
+Suggests: gir1.2-gnomekeyring-1.0, libgnome-keyring0, lsb-release
+Filename: ./slack/slack-desktop-4.24.0-amd64.deb
+Size: 65594638
+MD5sum: 40c8225856326f3f28a703c13c0e8df0
+SHA1: 73e5c6eb9614f0536c6de7c35b8bfb6b12073a90
+SHA256: b557d264ae68cafe383d647dfd26f366ee94315f77132f64bff8f9ef44635197
+Section: misc
+Priority: optional
+Description: Slack Desktop
+
