@@ -15,3 +15,18 @@ Section: misc
 Priority: optional
 Description: Slack Desktop
 
+Package: wireguird
+Source: wireguird
+Version: 0.2
+Architecture: amd64
+Maintainer: UnnoTed
+Depends: wireguard-tools, resolvconf, libgtk-3-dev, libappindicator3-dev (>= 1.0.0)
+Filename: ./wireguird/wireguird_amd64.deb
+Size: 1763560
+MD5sum: d3908acfeae69fbbc30c200ba1deff71
+SHA1: 8214ab8a906619962a6cebc543e42367faef2310
+SHA256: 5e5617f9f56406fe93473cdd7bf5ce59d594070b5df143d6e83568f8df2d1d83
+Section: utils
+Priority: extra
+Description: GTK GUI for Wireguard
+
