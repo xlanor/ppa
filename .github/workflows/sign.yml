@@ -25,7 +25,9 @@ jobs:
       - name: "Push signed packages and release to github"
         id: push
         uses: stefanzweifel/git-auto-commit-action@v4
-        commit_message: "Signed and pushed packages"
-        commit_user_name: "xlanor"
-        commit_user_email: "contact@jingk.ai"
-        
+        with:
+          commit_options: '--no-verify --signoff'
+          commit_message: "Signed and pushed packages"
+          commit_user_name: "xlanor"
+          commit_user_email: "contact@jingk.ai"
+          
