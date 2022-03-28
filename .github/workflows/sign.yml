@@ -10,13 +10,20 @@ jobs:
     name: Sign packages
     runs-on: ubuntu-latest
     steps:
+      - name: Import gpg
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: List Keys
+        id: list_keys
+        run: gpg -K
       - name: Checkout code
         uses: actions/checkout@v2
       - name: "Generate and sign packages"
         id: sign
         run: |
-          echo -n "${{ secrets.GPG_SIGNING_KEY }}" | base64 --decode > binary.asc
-          gpg --import --passphrase ${{ secrets.GPG_PASSPHRASE }} binary.asc 
           dpkg-scanpackages --multiversion . > Packages
           gzip -k -f Packages
           apt-ftparchive release . > Release
