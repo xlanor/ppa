@@ -1,0 +1,40 @@
+on:
+  pull_request:
+    branches:
+      - master
+
+name: Generate packages
+
+jobs:
+  build:
+    name: Sign packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Import gpg
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.GPG_SIGNING_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
+      - name: List Keys
+        id: list_keys
+        run: gpg -K
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: "Generate and sign packages"
+        id: sign
+        run: |
+          dpkg-scanpackages --multiversion . > Packages
+          gzip -k -f Packages
+          apt-ftparchive release . > Release
+          gpg --default-key "contact@jingk.ai" -abs -o - Release > Release.gpg
+          gpg --default-key "contact@jingk.ai" --clearsign -o - Release > InRelease
+      - name: "Push signed packages and release to github"
+        id: push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_options: '--no-verify --signoff'
+          commit_message: "Signed and pushed packages"
+          commit_user_name: "xlanor"
+          commit_user_email: "contact@jingk.ai"
+          
